@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { CardElement, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import moment from 'moment';
 
@@ -59,7 +60,7 @@ const CheckOut = ({ bookingData }) => {
             createdAt: moment().format('MMM Do YY'),
         };
         try {
-            fetch('http://localhost:5000/payments', {
+            fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/payments`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -91,9 +92,8 @@ const CheckOut = ({ bookingData }) => {
             .confirmPayment({
                 elements,
                 confirmParams: {
-                    return_url: 'http://localhost:3000/dashboard/checkout-success',
+                    return_url: `https://bike-insight-app.web.app/dashboard/checkout-success`,
                 },
-                redirect: 'if_required',
             })
             .then((result) => {
                 if (result.error) {
@@ -109,59 +109,6 @@ const CheckOut = ({ bookingData }) => {
                     }
                 }
             });
-        // const card = elements.getElement(CardElement);
-        // if (card === null) {
-        //     return;
-        // }
-        // const { error, paymentMethod } = await stripe.createPaymentMethod({
-        //     type: 'card',
-        //     card,
-        // });
-
-        // if (error) {
-        //     setCardError(error.message);
-        // } else {
-        //     setCardError('');
-        // }
-        // const { paymentIntent, error: finalError } = await stripe.confirmCardPayment(clientSecret, {
-        //     payment_method: {
-        //         card: card,
-        //         billing_details: {
-        //             email: email,
-        //         },
-        //     },
-        // });
-
-        // if (finalError) {
-        //     setCardError(finalError.message);
-        //     return;
-        // }
-        // if (paymentIntent.status === 'succeeded') {
-        //     console.log('card info', card);
-        //     // store payment info in the database
-        //     const payment = {
-        //         sellprice,
-        //         transactionId: paymentIntent.id,
-        //         email,
-        //         bookingId: _id,
-        //     };
-        //     fetch('http://localhost:5000/payments', {
-        //         method: 'POST',
-        //         headers: {
-        //             'content-type': 'application/json',
-        //             authorization: `bearer ${localStorage.getItem('accessToken')}`,
-        //         },
-        //         body: JSON.stringify(payment),
-        //     })
-        //         .then((res) => res.json())
-        //         .then((data) => {
-        //             console.log(data);
-        //             if (data.insertedId) {
-        //                 setSuccess('Congrats! your payment completed');
-        //                 setTransactionId(paymentIntent.id);
-        //             }
-        //         });
-        // }
         setProcessing(false);
     };
     return (

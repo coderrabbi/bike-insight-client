@@ -8,8 +8,7 @@ const BikesCategory = () => {
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_SERVER_BASE_URL}/bikescategory`)
-      .then((res) => setCategory(res.data))
-      .catch((err) => console.log(err));
+      .then((res) => setCategory(res.data));
   }, [category]);
   return (
     <div>

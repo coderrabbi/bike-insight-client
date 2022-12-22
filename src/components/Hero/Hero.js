@@ -21,14 +21,14 @@ const Hero = () => {
             <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
               <Link
                 rel="noopener noreferrer"
-                to="#"
+                to="/allproducts"
                 className="px-8 py-3 text-lg font-semibold rounded dark:bg-violet-400 dark:text-gray-900"
               >
                 Explore Bike
               </Link>
               <Link
                 rel="noopener noreferrer"
-                to="#"
+                to="/dashboard/addproducts"
                 className="px-8 py-3 text-lg font-semibold border rounded dark:border-gray-100"
               >
                 Sell Bike

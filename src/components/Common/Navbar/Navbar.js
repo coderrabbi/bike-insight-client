@@ -21,7 +21,6 @@ const Navbar = () => {
     const toggleMenu = () => {
         setToggle(!toggle);
     };
-    console.log(user);
     return (
         <div>
             <div className="navbar bg-gray-100">
